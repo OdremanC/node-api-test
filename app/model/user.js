@@ -4,7 +4,8 @@ var mongoose = require('mongoose');
 let UserSchema = new mongoose.Schema({
 	name: { type: String, required:true},
 	lastName:{type: String, required:true},
-	dni: {type:Number, required: true}
+	dni: {type:Number, required: true},
+	civilState: {type:String,required:true}
 });
 //exportamos el modelo
 module.exports = mongoose.model('User', UserSchema );

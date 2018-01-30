@@ -9,11 +9,13 @@ exports.list = function(req, res){
 }
 //crear registros
 exports.create = function(req, res){
-	console.log(req.body)
-  stock.create(req.body)
+	  stock.create(req.body)
   .then(function(response){
-  	res.send(response);
-  })
+    console.log(response);
+    res.send(response);
+  }).catch(error =>[
+    res.send(error)
+  ])
 }
 //get un registro por id
 exports.findById = function(req, res) {
@@ -26,12 +28,13 @@ exports.findById = function(req, res) {
 
 //DELETE - Borrar un registro con el id
 exports.delete = function(req, res) {
- 	stock.findById(req.params.id, function(err, stock) {
-		stock.remove(function(err) {
-			if(err) return res.send(500, err.message);
-			res.json({ message: 'Successfully deleted' });
-		 });
- 	});
+  stock.findById(req.params.id, function(err, stock) {
+    stock.remove(function(err) {
+      if(err) return res.send(500, err.message);
+      res.json({stock:stock, message: 'Successfully deleted' });
+      console.log('Successfully deleted')
+     });
+  });
 };
 
 //PUT - actualizar un registro existente

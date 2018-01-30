@@ -8,8 +8,7 @@ exports.list = function(req, res, next){
 }
 
 exports.create = function(req, res){
-	
-  user.create(req.body)
+	  user.create(req.body)
   .then(function(response){
     console.log(response);
     res.send(response);
@@ -45,9 +44,11 @@ exports.update = function(req, res) {
   user.name = req.body.name;
   user.lastName = req.body.lastName;
   user.dni = req.body.dni;
+  user.civilState = req.body.civilState;
   user.save(function(err) {
    if(err) return res.send(500, err.message);
    res.status(200).jsonp(user);
+   console.log('Successfully updated')
   });
  });
 };
