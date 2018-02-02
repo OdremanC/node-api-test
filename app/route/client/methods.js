@@ -1,14 +1,14 @@
-const user = require("../../model/user");
+const client = require("../../model/client");
 
 
 exports.list = function(req, res, next){
-  user.find({}).then(function(response){
+  client.find({}).then(function(response){
   	res.send(response);
   })
 }
 
 exports.create = function(req, res){
-	  user.create(req.body)
+	  client.create(req.body)
   .then(function(response){
     console.log(response);
     res.send(response);
@@ -19,19 +19,19 @@ exports.create = function(req, res){
 
 //get un registro por id
 exports.findById = function(req, res) {
-	user.findById(req.params.id, function(err, user) {
+	client.findById(req.params.id, function(err, client) {
 		if(err) return res.send(500, err.message);
-		console.log('GET /user/' + req.params.id);
-		res.status(200).jsonp(user);
+		console.log('GET /client/' + req.params.id);
+		res.status(200).jsonp(client);
 	});
 }; 
 
 //DELETE - Borrar un registro con el id
 exports.delete = function(req, res) {
-  user.findById(req.params.id, function(err, user) {
-    user.remove(function(err) {
+  client.findById(req.params.id, function(err, client) {
+    client.remove(function(err) {
       if(err) return res.send(500, err.message);
-      res.json({user:user, message: 'Successfully deleted' });
+      res.json({client:client, message: 'Successfully deleted' });
       console.log('Successfully deleted')
      });
   });
@@ -40,14 +40,14 @@ exports.delete = function(req, res) {
 
 //PUT - actualizar un registro existente
 exports.update = function(req, res) {
- user.findById(req.params.id, function(err, user) {
-  user.name = req.body.name;
-  user.lastName = req.body.lastName;
-  user.dni = req.body.dni;
-  user.civilState = req.body.civilState;
-  user.save(function(err) {
+ client.findById(req.params.id, function(err, client) {
+  client.name = req.body.name;
+  client.lastName = req.body.lastName;
+  client.dni = req.body.dni;
+  client.civilState = req.body.civilState;
+  client.save(function(err) {
    if(err) return res.send(500, err.message);
-   res.status(200).jsonp(user);
+   res.status(200).jsonp(client);
    console.log('Successfully updated')
   });
  });
