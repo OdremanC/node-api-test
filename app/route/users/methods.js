@@ -51,6 +51,7 @@ exports.update = function(req, res) {
  users.findById(req.params.id, function(err, users) {
   users.userName = req.body.userName;
   users.password = req.body.password;
+  users.email = req.body.email;
   users.save(function(err) {
    if(err) return res.send(500, err.message);
    res.status(200).jsonp(users);
