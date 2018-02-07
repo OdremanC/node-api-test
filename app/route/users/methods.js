@@ -25,11 +25,20 @@ exports.findById = function(req, res) {
 		res.status(200).jsonp(users);
 	});
 }; 
+//get un registro por name
+exports.findByName = function(req, res) {
+ users.find({userName: req.params.userName}, function(err, users){
+    if(err) return res.send(500, err.message);
+    if (!users) { return res.send(500, err.message)}
+    res.status(200).jsonp(users);
+    console.log(users);
+  })
+}; 
 //login
 exports.login = function(req,res) {
   users.findOne({userName: req.body.userName, password:req.body.password}, function(err, users){
     if(err) return res.send(500, err.message);
-    if (!users) { return res.send(false)}
+    if (!users) { return res.send(400, "login error, some data is wrong")}
     res.send(true);
   })
 }
@@ -49,6 +58,8 @@ exports.delete = function(req, res) {
 //PUT - actualizar un registro existente
 exports.update = function(req, res) {
  users.findById(req.params.id, function(err, users) {
+  users.firstName = req.body.firstName;
+  users.lastName = req.body.lastName;
   users.userName = req.body.userName;
   users.password = req.body.password;
   users.email = req.body.email;

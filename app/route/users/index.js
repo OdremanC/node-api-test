@@ -8,4 +8,5 @@ module.exports = function(app){
 	app.delete('/users/:id',methods.delete);
 	app.put('/users/:id',methods.update);
 	app.post('/users/:userName',methods.login);
+	app.get('/users/userName/:userName',methods.findByName);
 }
