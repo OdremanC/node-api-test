@@ -39,7 +39,7 @@ exports.login = function(req,res) {
   users.findOne({userName: req.body.userName, password:req.body.password}, function(err, users){
     if(err) return res.send(500, err.message);
     if (!users) { return res.send(400, "login error, some data is wrong")}
-    res.send(true);
+    res.send({userID:users._id, message: "login success", isLogged:true});
   })
 }
 
